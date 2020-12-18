@@ -1,4 +1,4 @@
-import IHTTPProvider from '@shared/container/providers/HTTPProvider/IHttpProvider';
+import IHTTPProvider from '@shared/container/providers/HTTPProvider/IHTTPProvider';
 import { inject, injectable } from 'tsyringe';
 import IWeatherProvider from '../IWeatherProvider';
 

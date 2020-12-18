@@ -1,18 +1,18 @@
 import IMusicProvider from '../IMusicProvider';
 
 class FakeMusicProvider implements IMusicProvider {
-  async getTrackRecommendation(genre: string): Promise<string> {
+  async getTracksRecommendation(genre: string): Promise<string[]> {
     switch (genre) {
       case 'party':
-        return "Can't get Over";
+        return ["Can't get Over"];
       case 'pop':
-        return 'Kansas';
+        return ['Tusa'];
       case 'rock':
-        return 'Last Kiss';
+        return ['Last Kiss'];
       case 'classical':
-        return '5th Sinfonia Bethoven';
+        return ['5th Sinfonia Bethoven'];
       default:
-        return 'Rocket Queen';
+        return ['Rocket Queen'];
     }
   }
 }

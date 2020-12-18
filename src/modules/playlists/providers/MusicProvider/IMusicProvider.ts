@@ -1,3 +1,3 @@
 export default interface IMusicProvider {
-  getTrackRecommendation(genre: string): Promise<string>;
+  getTracksRecommendation(genre: string): Promise<string[]>;
 }

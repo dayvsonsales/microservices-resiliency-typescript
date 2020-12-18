@@ -1,12 +1,16 @@
-import IHTTPProvider from '@shared/container/providers/HTTPProvider/IHttpProvider';
+import IHTTPProvider from '@shared/container/providers/HTTPProvider/IHTTPProvider';
 import IMusicProvider from '../IMusicProvider';
 
 import musicConfig from '@config/music';
 import { inject, injectable } from 'tsyringe';
+import AppError from '@shared/errors/AppError';
 
 const TRACK_RECOMMENDATION_ENDPOINT =
   'https://api.spotify.com/v1/recommendations';
 
+interface ITrack {
+  name: string;
+}
 @injectable()
 class SpotifyMusicProvider implements IMusicProvider {
   constructor(
@@ -14,12 +18,12 @@ class SpotifyMusicProvider implements IMusicProvider {
     private api: IHTTPProvider,
   ) {}
 
-  async getTrackRecommendation(genre: string): Promise<string> {
-    let trackName = '';
-
+  async getTracksRecommendation(genre: string): Promise<string[]> {
     try {
-      const { data } = await this.api.get(
-        `${TRACK_RECOMMENDATION_ENDPOINT}?limit=1&seed_genre=${genre}`,
+      const {
+        data: { tracks },
+      } = await this.api.get(
+        `${TRACK_RECOMMENDATION_ENDPOINT}?seed_genre=${genre}`,
         {
           headers: {
             Authorization: `Bearer ${musicConfig.spotify.apiKey}`,
@@ -27,18 +31,11 @@ class SpotifyMusicProvider implements IMusicProvider {
         },
       );
 
-      if (data && data.tracks.length > 0) {
-        trackName = data.tracks[0].name;
-      } else {
-        throw new Error(
-          'Something wrong with data returned from Spotify. Needs to be investigated',
-        );
-      }
+      return tracks.map((track: ITrack) => track.name);
     } catch (e) {
-      throw new Error(e.message);
+      console.log(musicConfig.spotify.apiKey);
+      throw new AppError(e.message);
     }
-
-    return trackName;
   }
 }
 

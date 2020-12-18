@@ -1,15 +1,36 @@
 import IWeatherProvider from '../IWeatherProvider';
 
 class FakeWeatherProvider implements IWeatherProvider {
-  async fetchTemperatureByCityName(city: string): Promise<number> {
-    return 30;
+  async fetchTemperatureInCelsiusByCityName(city: string): Promise<number> {
+    switch (city) {
+      case 'Maceió':
+        return 30;
+      case 'Manaus':
+        return 32;
+      case 'Porto Alegre':
+        return 10;
+      default:
+        return 9;
+    }
   }
 
-  async fetchTemperatureByCoords(
+  async fetchTemperatureInCelsiusByCoords(
     latitude: number,
     longitude: number,
   ): Promise<number> {
-    return 40;
+    if (latitude == 30 && longitude == 40) {
+      return 30;
+    }
+
+    if (latitude == 31 && longitude == 40) {
+      return 32;
+    }
+
+    if (latitude == 29 && longitude == 40) {
+      return 10;
+    }
+
+    return 9;
   }
 }
 
