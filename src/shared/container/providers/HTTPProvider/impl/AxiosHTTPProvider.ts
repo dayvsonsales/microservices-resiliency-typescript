@@ -10,13 +10,13 @@ class AxiosHTTPProvider implements IHTTPProvider {
     });
   }
 
-  async get(url: string, options: object): Promise<any> {
+  async get(url: string, options?: object): Promise<any> {
     const data = await this.api.get(url, options);
 
     return data;
   }
-  async post(url: string, postData: object): Promise<any> {
-    const data = await this.api.post(url, postData);
+  async post(url: string, postData: object, options?: object): Promise<any> {
+    const data = await this.api.post(url, postData, options);
 
     return data;
   }
