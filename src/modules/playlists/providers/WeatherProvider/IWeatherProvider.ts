@@ -1,6 +1,6 @@
 export default interface IWeatherProvider {
-  fetchTemperatureByCityName(city: string): Promise<number>;
-  fetchTemperatureByCoords(
+  fetchTemperatureInCelsiusByCityName(city: string): Promise<number>;
+  fetchTemperatureInCelsiusByCoords(
     latitude: number,
     longitude: number,
   ): Promise<number>;
