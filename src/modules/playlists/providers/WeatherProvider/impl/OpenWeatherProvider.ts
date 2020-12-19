@@ -18,7 +18,7 @@ class OpenWeatherProvider implements IWeatherProvider {
     try {
       const {
         data: {
-          main: { temperature },
+          main: { temp: temperature },
         },
       } = await this.api.get(
         `${TEMPERATURE_ENDPOINT}?q=${city}&units=metric&appId=${weatherConfig.openWeatherMaps.apiKey}`,
