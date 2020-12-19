@@ -1,9 +1,12 @@
 import { container } from 'tsyringe';
+import ICacheProvider from './CacheProvider/ICacheProvider';
+import RedisCacheProvider from './CacheProvider/impl/RedisCacheProvider';
+import IHTTPProvider from './HTTPProvider/IHTTPProvider';
+import AxiosHTTPProvider from './HTTPProvider/impl/AxiosHTTPProvider';
 
-import DiskStorageProvider from './StorageProvider/implementations/DiskStorageProvider';
-import IStorageProvider from './StorageProvider/IStorageProvider';
-
-container.registerSingleton<IStorageProvider>(
-  'StorageProvider',
-  DiskStorageProvider,
+container.registerSingleton<ICacheProvider>(
+  'CacheProvider',
+  RedisCacheProvider,
 );
+
+container.registerSingleton<IHTTPProvider>('HTTPProvider', AxiosHTTPProvider);
