@@ -1,4 +1,4 @@
-import IHTTPProvider from '../IHttpProvider';
+import IHTTPProvider from '../IHTTPProvider';
 import axios, { AxiosInstance } from 'axios';
 
 class AxiosHTTPProvider implements IHTTPProvider {
@@ -15,6 +15,7 @@ class AxiosHTTPProvider implements IHTTPProvider {
 
     return data;
   }
+
   async post(url: string, postData: object, options?: object): Promise<any> {
     const data = await this.api.post(url, postData, options);
 
@@ -22,4 +23,4 @@ class AxiosHTTPProvider implements IHTTPProvider {
   }
 }
 
-export default new AxiosHTTPProvider();
+export default AxiosHTTPProvider;

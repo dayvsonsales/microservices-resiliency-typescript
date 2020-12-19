@@ -26,4 +26,4 @@ class RedisCacheProvider implements ICacheProvider {
   }
 }
 
-export default new RedisCacheProvider();
+export default RedisCacheProvider;
