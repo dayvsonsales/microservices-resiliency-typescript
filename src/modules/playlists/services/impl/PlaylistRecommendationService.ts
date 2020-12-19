@@ -1,8 +1,8 @@
-import IMusicProvider from '../providers/MusicProvider/IMusicProvider';
-import IWeatherProvider from '../providers/WeatherProvider/IWeatherProvider';
+import IMusicProvider from '@modules/playlists/providers/MusicProvider/IMusicProvider';
+import IWeatherProvider from '@modules/playlists/providers/WeatherProvider/IWeatherProvider';
 import { inject, injectable } from 'tsyringe';
 
-import IPlaylistRecommendationService from './IPlaylistRecommendationService';
+import IPlaylistRecommendationService from '../IPlaylistRecommendationService';
 
 @injectable()
 class PlaylistRecommendationService implements IPlaylistRecommendationService {

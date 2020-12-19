@@ -1,5 +1,5 @@
-import FakeMusicProvider from '../providers/MusicProvider/fakes/FakeMusicProvider';
-import FakeWeatherProvider from '../providers/WeatherProvider/fakes/FakeWeatherProvider';
+import FakeMusicProvider from '../../providers/MusicProvider/fakes/FakeMusicProvider';
+import FakeWeatherProvider from '../../providers/WeatherProvider/fakes/FakeWeatherProvider';
 import PlaylistRecommendationService from './PlaylistRecommendationService';
 
 describe('Recommendation of playlists', () => {
