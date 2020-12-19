@@ -1,8 +1,6 @@
-import PlaylistRecommendationService from '@modules/playlists/services/PlaylistRecommendationService';
+import PlaylistRecommendationServiceProxy from '@modules/playlists/services/proxy/PlaylistRecommendationServiceProxy';
 import { Request, Response } from 'express';
-
 import { container } from 'tsyringe';
-
 export default class PlaylistsController {
   async index(request: Request, response: Response): Promise<Response> {
     const { city, lat, long } = request.query;
@@ -23,16 +21,16 @@ export default class PlaylistsController {
 
     let tracks = [];
 
-    const playlistRecommendationService = container.resolve(
-      PlaylistRecommendationService,
+    const playlistRecommendationServiceProxy = container.resolve(
+      PlaylistRecommendationServiceProxy,
     );
 
     if (city) {
-      tracks = await playlistRecommendationService.recommendByCity(
+      tracks = await playlistRecommendationServiceProxy.recommendByCity(
         city as string,
       );
     } else {
-      tracks = await playlistRecommendationService.recommendByCoordinates(
+      tracks = await playlistRecommendationServiceProxy.recommendByCoordinates(
         Number(lat),
         Number(long),
       );

@@ -2,8 +2,10 @@ import IMusicProvider from '../providers/MusicProvider/IMusicProvider';
 import IWeatherProvider from '../providers/WeatherProvider/IWeatherProvider';
 import { inject, injectable } from 'tsyringe';
 
+import IPlaylistRecommendationService from './IPlaylistRecommendationService';
+
 @injectable()
-class PlaylistRecommendationService {
+class PlaylistRecommendationService implements IPlaylistRecommendationService {
   constructor(
     @inject('MusicProvider')
     private musicProvider: IMusicProvider,
