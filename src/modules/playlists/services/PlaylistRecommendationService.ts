@@ -17,8 +17,6 @@ class PlaylistRecommendationService {
       cityName,
     );
 
-    console.log(temperature);
-
     const genre = this.getGenre(temperature);
 
     const tracks = await this.musicProvider.getTracksRecommendation(genre);

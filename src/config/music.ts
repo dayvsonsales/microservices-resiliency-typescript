@@ -1,5 +1,6 @@
 export default {
   spotify: {
-    apiKey: process.env.SPOTIFY_API_KEY || '',
+    clientId: process.env.SPOTIFY_CLIENT_ID || '',
+    clientSecret: process.env.SPOTIFY_CLIENT_SECRET || '',
   },
 };
