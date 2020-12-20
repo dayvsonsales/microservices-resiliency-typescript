@@ -16,13 +16,13 @@ class RedisCacheProvider implements ICacheProvider {
   }
 
   async set(key: string, value: any): Promise<void> {
-    await this.client.set(key, value);
+    await this.client.set(key, JSON.stringify(value));
   }
 
-  async get(key: string): Promise<string | undefined> {
+  async get(key: string): Promise<any | undefined> {
     const value = await this.client.get(key);
 
-    return value;
+    return JSON.parse(value);
   }
 }
 

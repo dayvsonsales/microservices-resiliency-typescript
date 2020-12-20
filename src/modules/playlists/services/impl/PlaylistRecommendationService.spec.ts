@@ -1,3 +1,4 @@
+import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider';
 import FakeMusicProvider from '../../providers/MusicProvider/fakes/FakeMusicProvider';
 import FakeWeatherProvider from '../../providers/WeatherProvider/fakes/FakeWeatherProvider';
 import PlaylistRecommendationService from './PlaylistRecommendationService';
@@ -6,10 +7,12 @@ describe('Recommendation of playlists', () => {
   it('should recommend a pop playlist', async () => {
     const fakeMusicProvider = new FakeMusicProvider();
     const fakeWeatherProvider = new FakeWeatherProvider();
+    const fakeCacheProvider = new FakeCacheProvider();
 
     const playlistRecommendationService = new PlaylistRecommendationService(
       fakeMusicProvider,
       fakeWeatherProvider,
+      fakeCacheProvider,
     );
 
     const tracksViaCity = await playlistRecommendationService.recommendByCity(
@@ -27,10 +30,12 @@ describe('Recommendation of playlists', () => {
   it('should recommend a classical playlist', async () => {
     const fakeMusicProvider = new FakeMusicProvider();
     const fakeWeatherProvider = new FakeWeatherProvider();
+    const fakeCacheProvider = new FakeCacheProvider();
 
     const playlistRecommendationService = new PlaylistRecommendationService(
       fakeMusicProvider,
       fakeWeatherProvider,
+      fakeCacheProvider,
     );
 
     const tracksViaCity = await playlistRecommendationService.recommendByCity(
@@ -48,10 +53,12 @@ describe('Recommendation of playlists', () => {
   it('should recommend a rock playlist', async () => {
     const fakeMusicProvider = new FakeMusicProvider();
     const fakeWeatherProvider = new FakeWeatherProvider();
+    const fakeCacheProvider = new FakeCacheProvider();
 
     const playlistRecommendationService = new PlaylistRecommendationService(
       fakeMusicProvider,
       fakeWeatherProvider,
+      fakeCacheProvider,
     );
 
     const tracksViaCity = await playlistRecommendationService.recommendByCity(
@@ -69,10 +76,12 @@ describe('Recommendation of playlists', () => {
   it('should recommend a party playlist', async () => {
     const fakeMusicProvider = new FakeMusicProvider();
     const fakeWeatherProvider = new FakeWeatherProvider();
+    const fakeCacheProvider = new FakeCacheProvider();
 
     const playlistRecommendationService = new PlaylistRecommendationService(
       fakeMusicProvider,
       fakeWeatherProvider,
+      fakeCacheProvider,
     );
 
     const tracksViaCity = await playlistRecommendationService.recommendByCity(

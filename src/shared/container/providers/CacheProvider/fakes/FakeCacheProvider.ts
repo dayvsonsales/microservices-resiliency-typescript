@@ -12,7 +12,7 @@ class FakeCacheProvider implements ICacheProvider {
   }
 
   async get(key: string): Promise<string | undefined> {
-    return this.hashTable[key];
+    return JSON.stringify(this.hashTable[key]);
   }
 }
 
