@@ -11,4 +11,5 @@ It's based on iFood backend challenge and makes use of SOLID, DDD, KISS, DRY, an
 * Redis
 * Spotify Web API
 * Open Weather Maps API
+* Opossum circuit breaker lib
 
