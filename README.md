@@ -1,4 +1,4 @@
-# Playlists suggests microservice
+# Playlists suggestions
 
 This a RESTful API that receive as parameter either city name or lat long coordinates and returns a playlist suggestion according to the current temperature.  
 
