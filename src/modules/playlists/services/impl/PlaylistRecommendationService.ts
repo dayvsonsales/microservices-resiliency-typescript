@@ -6,7 +6,7 @@ import { inject, injectable } from 'tsyringe';
 import IPlaylistRecommendationService from '../IPlaylistRecommendationService';
 
 import cacheConfig from '@config/cache';
-import Cache from '@modules/playlists/models/Cache';
+import Cache from '@modules/playlists/models/PlaylistCache';
 @injectable()
 class PlaylistRecommendationService implements IPlaylistRecommendationService {
   constructor(

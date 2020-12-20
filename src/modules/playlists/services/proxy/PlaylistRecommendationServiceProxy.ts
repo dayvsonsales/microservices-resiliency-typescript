@@ -3,7 +3,7 @@ import { inject, injectable, singleton } from 'tsyringe';
 import CircuitBreaker from 'opossum';
 import IPlaylistRecommendationService from '../IPlaylistRecommendationService';
 import ICacheProvider from '@shared/container/providers/CacheProvider/ICacheProvider';
-import Cache from '@modules/playlists/models/Cache';
+import Cache from '@modules/playlists/models/PlaylistCache';
 
 const circuitBreakerOptions = {
   errorThresholdPercentage: 50,
