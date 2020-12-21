@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+    redis:
+        image: redis:latest
+        restart: always
+        ports:
+            - "6379:6379"
+    playlists-recommendation: 
+        depends_on: 
+            - redis
+        build: .
+        image: dayvsonsales/playlists-recommendation
+        ports:
+            - "3333:3333"
