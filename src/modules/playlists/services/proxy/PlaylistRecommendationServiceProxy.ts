@@ -4,6 +4,7 @@ import CircuitBreaker from 'opossum';
 import IPlaylistRecommendationService from '../IPlaylistRecommendationService';
 import ICacheProvider from '@shared/container/providers/CacheProvider/ICacheProvider';
 import Cache from '@modules/playlists/models/PlaylistCache';
+import AppError from '@shared/errors/AppError';
 
 const circuitBreakerOptions = {
   errorThresholdPercentage: 50,
@@ -57,9 +58,9 @@ class PlaylistRecommendationServiceProxy {
     this.circuitRecommendByCity.on('open', () =>
       console.log('Recommend by City are open now'),
     );
-    this.circuitRecommendByCity.fallback(cityName =>
-      this.handleFallback(cityName),
-    );
+    this.circuitRecommendByCity.fallback((cityName, err) => {
+      return this.handleFallbackByCity(cityName, err);
+    });
 
     this.circuitRecommendByCoords = new CircuitBreaker(
       (latitude: number, longitude: number) =>
@@ -73,12 +74,44 @@ class PlaylistRecommendationServiceProxy {
     this.circuitRecommendByCoords.on('open', () =>
       console.log('Recommend by Coordinates are open now'),
     );
-    this.circuitRecommendByCoords.fallback((latitude, longitude) =>
-      this.handleFallback(`${latitude}:${longitude}`),
-    );
+    this.circuitRecommendByCoords.fallback((latitude, longitude, err) => {
+      return this.handleFallbackByCoords(`${latitude}:${longitude}`, err);
+    });
   }
 
-  private async handleFallback(key: string): Promise<string[]> {
+  private async handleFallbackByCity(
+    key: string,
+    err: any,
+  ): Promise<string[] | AppError> {
+    if (err && err.response?.status === 404) {
+      this.circuitRecommendByCity.close();
+
+      return new AppError(
+        err.response.data.message || 'Not found',
+        err.response.status,
+      );
+    }
+
+    return this.getTracksInCache(key);
+  }
+
+  private async handleFallbackByCoords(
+    key: string,
+    err: any,
+  ): Promise<string[] | AppError> {
+    if (err && err.response?.status === 404) {
+      this.circuitRecommendByCoords.close();
+
+      return new AppError(
+        err.response.data.message || 'Not found',
+        err.response.status,
+      );
+    }
+
+    return this.getTracksInCache(key);
+  }
+
+  private async getTracksInCache(key: string): Promise<string[]> {
     const cacheData = (await this.cacheProvider.get(key)) as Cache;
 
     if (cacheData) {

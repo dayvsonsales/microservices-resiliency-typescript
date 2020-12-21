@@ -3,7 +3,6 @@ import { inject, injectable } from 'tsyringe';
 import IWeatherProvider from '../IWeatherProvider';
 
 import weatherConfig from '@config/weather';
-import AppError from '@shared/errors/AppError';
 
 const TEMPERATURE_ENDPOINT = 'https://api.openweathermap.org/data/2.5/weather';
 
@@ -15,38 +14,30 @@ class OpenWeatherProvider implements IWeatherProvider {
   ) {}
 
   async fetchTemperatureInCelsiusByCityName(city: string): Promise<number> {
-    try {
-      const {
-        data: {
-          main: { temp: temperature },
-        },
-      } = await this.api.get(
-        `${TEMPERATURE_ENDPOINT}?q=${city}&units=metric&appId=${weatherConfig.openWeatherMaps.apiKey}`,
-      );
+    const {
+      data: {
+        main: { temp: temperature },
+      },
+    } = await this.api.get(
+      `${TEMPERATURE_ENDPOINT}?q=${city}&units=metric&appId=${weatherConfig.openWeatherMaps.apiKey}`,
+    );
 
-      return temperature;
-    } catch (e) {
-      throw new AppError(e.message);
-    }
+    return temperature;
   }
 
   async fetchTemperatureInCelsiusByCoords(
     latitude: number,
     longitude: number,
   ): Promise<number> {
-    try {
-      const {
-        data: {
-          main: { temperature },
-        },
-      } = await this.api.get(
-        `${TEMPERATURE_ENDPOINT}?lat=${latitude}&units=metric&lon=${longitude}&appId=${weatherConfig.openWeatherMaps.apiKey}`,
-      );
+    const {
+      data: {
+        main: { temperature },
+      },
+    } = await this.api.get(
+      `${TEMPERATURE_ENDPOINT}?lat=${latitude}&units=metric&lon=${longitude}&appId=${weatherConfig.openWeatherMaps.apiKey}`,
+    );
 
-      return temperature;
-    } catch (e) {
-      throw new AppError(e.message);
-    }
+    return temperature;
   }
 }
 

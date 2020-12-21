@@ -3,7 +3,6 @@ import IMusicProvider from '../IMusicProvider';
 
 import musicConfig from '@config/music';
 import { inject, injectable } from 'tsyringe';
-import AppError from '@shared/errors/AppError';
 
 const TRACK_RECOMMENDATION_ENDPOINT =
   'https://api.spotify.com/v1/recommendations';
@@ -30,28 +29,20 @@ class SpotifyMusicProvider implements IMusicProvider {
   private accessInformation: AccessInformation;
 
   async getTracksRecommendation(genre: string): Promise<string[]> {
-    try {
-      const token = await this.getSpotifyToken();
+    const token = await this.getSpotifyToken();
 
-      const {
-        data: { tracks },
-      } = await this.api.get(
-        `${TRACK_RECOMMENDATION_ENDPOINT}?seed_genres=${genre}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+    const {
+      data: { tracks },
+    } = await this.api.get(
+      `${TRACK_RECOMMENDATION_ENDPOINT}?seed_genres=${genre}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-      );
+      },
+    );
 
-      return tracks.map((track: ITrack) => track.name);
-    } catch (e) {
-      console.log(e);
-      throw new AppError(
-        `Something went wrong while calling Spotify Client (${e.message})`,
-        500,
-      );
-    }
+    return tracks.map((track: ITrack) => track.name);
   }
 
   private async getSpotifyToken(): Promise<string> {
@@ -62,40 +53,32 @@ class SpotifyMusicProvider implements IMusicProvider {
       return this.accessInformation.access_token;
     }
 
-    try {
-      const { clientId, clientSecret } = musicConfig.spotify;
+    const { clientId, clientSecret } = musicConfig.spotify;
 
-      const encodedIdAndSecret = Buffer.from(
-        `${clientId}:${clientSecret}`,
-      ).toString('base64');
+    const encodedIdAndSecret = Buffer.from(
+      `${clientId}:${clientSecret}`,
+    ).toString('base64');
 
-      const {
-        data: { access_token, token_type, expires_in },
-      } = await this.api.post(
-        REQUEST_TOKEN_ENDPOINT,
-        `grant_type=client_credentials`,
-        {
-          headers: {
-            'content-type': 'application/x-www-form-urlencoded',
-            Authorization: `Basic ${encodedIdAndSecret}`,
-          },
+    const {
+      data: { access_token, token_type, expires_in },
+    } = await this.api.post(
+      REQUEST_TOKEN_ENDPOINT,
+      `grant_type=client_credentials`,
+      {
+        headers: {
+          'content-type': 'application/x-www-form-urlencoded',
+          Authorization: `Basic ${encodedIdAndSecret}`,
         },
-      );
+      },
+    );
 
-      this.accessInformation = {
-        access_token,
-        token_type,
-        expires_in: expires_in + new Date().getTime(),
-      } as AccessInformation;
+    this.accessInformation = {
+      access_token,
+      token_type,
+      expires_in: expires_in + new Date().getTime(),
+    } as AccessInformation;
 
-      return this.accessInformation.access_token;
-    } catch (e) {
-      console.log(e);
-      throw new AppError(
-        `Something went wrong while calling Spotify Client (${e.message})`,
-        500,
-      );
-    }
+    return this.accessInformation.access_token;
   }
 }
 
