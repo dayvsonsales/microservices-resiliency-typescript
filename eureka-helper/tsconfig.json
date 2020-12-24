@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "../dist/",
+    "resolveJsonModule": true,
+    "composite": true
+  },
+  "references": [{ "path": "../" }]
+}
