@@ -9,4 +9,4 @@ echo "Finished Zuul build";
 echo "Executing docker-compose up command";
 docker-compose up --build
 
-echo "Sucess!";
+echo "Success!";
