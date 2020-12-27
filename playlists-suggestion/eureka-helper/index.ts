@@ -11,7 +11,7 @@ async function registerWithEureka(appName: string, port: number) {
 
   const data = {
     instance: {
-      hostName: `localhost`,
+      hostName: process.env.HOSTNAME || 'localhost',
       instanceId: `${appName}-${port}`,
       vipAddress: `${appName}`,
       app: `${appName.toUpperCase()}`,

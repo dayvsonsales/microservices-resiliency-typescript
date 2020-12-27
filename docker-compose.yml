@@ -6,14 +6,22 @@ services:
     ports:
       - "6379:6379"
   eureka-server:
-    build: ./eurekaservice
+    build: ./eureka-server
     image: dayvsonsales/eureka-server
     ports:
       - "8761:8761"
-  playlists-recommendation:
+  zuul-server:
+    depends_on:
+      - eureka-server
+    build: ./zuul-server
+    image: dayvsonsales/zuul-server
+    ports:
+      - "8762:8762"
+  playlists-suggestion:
     depends_on:
       - redis
       - eureka-server
+      - zuul-server
     restart: always
     build: ./playlists-suggestion
     image: dayvsonsales/playlists-suggestion
