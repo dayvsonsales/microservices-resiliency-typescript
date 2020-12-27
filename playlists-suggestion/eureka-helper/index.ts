@@ -52,6 +52,7 @@ async function registerWithEureka(appName: string, port: number) {
     }, 50 * 1000);
   } catch (e) {
     console.log(`Eureka error: ${e}`);
+    setTimeout(() => registerWithEureka(appName, port), 10000);
   }
 }
 

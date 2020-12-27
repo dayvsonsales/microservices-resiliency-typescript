@@ -14,6 +14,7 @@ services:
     depends_on:
       - redis
       - eureka-server
+    restart: always
     build: ./playlists-suggestion
     image: dayvsonsales/playlists-suggestion
     ports:

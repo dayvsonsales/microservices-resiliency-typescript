@@ -1,5 +1,6 @@
 dependencies:
   '@types/axios': 0.14.0
+  '@types/ip': 1.1.0
   async-redis: 1.1.7
   axios: 0.21.0
   bcryptjs: 2.4.3
@@ -8,6 +9,7 @@ dependencies:
   dotenv: 8.2.0
   express: 4.17.1
   express-async-errors: 3.1.1_express@4.17.1
+  ip: 1.1.5
   jsonwebtoken: 8.5.1
   multer: 1.4.2
   opossum: 5.1.1
@@ -1429,6 +1431,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-mWA/4zFQhfvOA8zWkXobwJvBD7vzcxgrOQ0J5CH1votGqdq9m7+FwtGaqyCZqC3NyyBkc9z4m+iry4LlqcMWJg==
+  /@types/ip/1.1.0:
+    dependencies:
+      '@types/node': 14.14.14
+    dev: false
+    resolution:
+      integrity: sha512-dwNe8gOoF70VdL6WJBwVHtQmAX4RMd62M+mAB9HQFjG1/qiCLM/meRy95Pd14FYBbEDwCq7jgJs89cHpLBu4HQ==
   /@types/istanbul-lib-coverage/2.0.3:
     resolution:
       integrity: sha512-sz7iLqvVUg1gIedBOvlkxPlc8/uVzyS5OwGz1cKjXzkl3FpL3al0crU8YGU1WoHkxn0Wxbw5tyi6hvzJKNzFsw==
@@ -3594,6 +3602,10 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha1-+ni/XS5pE8kRzp+BnuUUa7bYROk=
+  /ip/1.1.5:
+    dev: false
+    resolution:
+      integrity: sha1-vd7XARQpCCjAoDnnLvJfWq7ENUo=
   /ipaddr.js/1.9.1:
     dev: false
     engines:
@@ -6964,6 +6976,7 @@ specifiers:
   '@types/bcryptjs': ^2.4.2
   '@types/cors': ^2.8.9
   '@types/express': ^4.17.8
+  '@types/ip': ^1.1.0
   '@types/jest': ^26.0.19
   '@types/jsonwebtoken': ^8.5.0
   '@types/multer': ^1.4.4
@@ -6986,6 +6999,7 @@ specifiers:
   eslint-plugin-prettier: ^3.1.4
   express: ^4.17.1
   express-async-errors: ^3.1.1
+  ip: ^1.1.5
   jest: ^26.6.3
   jsonwebtoken: ^8.5.1
   multer: ^1.4.2
