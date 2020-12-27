@@ -12,4 +12,12 @@ It's based on iFood backend challenge and makes use of SOLID, DDD, KISS, DRY, an
 * Spotify Web API
 * Open Weather Maps API
 * Opossum circuit breaker lib
+* Netflix Eureka
+
+## Using
+
+* Run build_and_start.sh
+* Go to http://localhost:8761 to see Eureka server running
+* The http://localhost:3333 is the entry point of API
+* Send a GET request to http://localhost:3333/playlists/recommendation with city or (lat, long) as query params
 
