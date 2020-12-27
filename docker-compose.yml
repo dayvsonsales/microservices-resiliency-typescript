@@ -1,14 +1,20 @@
-version: '3.8'
+version: "3.8"
 services:
-    redis:
-        image: redis:latest
-        restart: always
-        ports:
-            - "6379:6379"
-    playlists-recommendation: 
-        depends_on: 
-            - redis
-        build: .
-        image: dayvsonsales/playlists-recommendation
-        ports:
-            - "3333:3333"
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - "6379:6379"
+  eureka-server:
+    build: ./eurekaservice
+    image: dayvsonsales/eureka-server
+    ports:
+      - "8761:8761"
+  playlists-recommendation:
+    depends_on:
+      - redis
+      - eureka-server
+    build: ./playlists-suggestion
+    image: dayvsonsales/playlists-suggestion
+    ports:
+      - "3333:3333"
