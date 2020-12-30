@@ -2,4 +2,6 @@ import 'reflect-metadata';
 
 import registerWithEureka from '../eureka-helper';
 
-registerWithEureka('playlists-suggestion', 3333);
+if (process.env.NODE_ENV !== 'test') {
+  registerWithEureka('playlists-suggestion', 3333);
+}

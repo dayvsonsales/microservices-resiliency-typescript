@@ -5,9 +5,9 @@
   "license": "MIT",
   "scripts": {
     "build": "babel src --extensions \".js,.ts\" --out-dir dist/src --copy-files && babel eureka-helper --extensions \".js,.ts\" --out-dir dist/eureka-helper --copy-files",
-    "start": "ts-node src/shared/infra/http/server.ts",
-    "dev:server": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/infra/http/server.ts",
-    "test": "jest"
+    "start": "ts-node src/infra/http/server.ts",
+    "dev:server": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/infra/http/server.ts",
+    "test": "NODE_ENV=test; jest"
   },
   "dependencies": {
     "@types/axios": "^0.14.0",

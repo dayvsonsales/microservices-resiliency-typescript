@@ -9,9 +9,13 @@
     "strictPropertyInitialization": false,
     "baseUrl": "./src",
     "paths": {
-      "@modules/*": ["modules/*"],
+      "@services/*": ["services/*"],
       "@config/*": ["config/*"],
-      "@shared/*": ["shared/*"]
+      "@providers/*": ["providers/*"],
+      "@infra/*": ["infra/*"],
+      "@container/*": ["container/*"],
+      "@errors/*": ["errors/*"],
+      "@domain/*": ["domain/*"]
     },
     "esModuleInterop": true,
     "experimentalDecorators": true,
